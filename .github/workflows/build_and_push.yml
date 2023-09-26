@@ -41,6 +41,7 @@ jobs:
                 export GCLOUD_DOCKER_REPO_NAME=${{ secrets.GCLOUD_DOCKER_REPO_NAME }}
                 export SERVICE_IMAGE_NAME=hybrid-cicd-react
                 export TAG_NAME=1.0.$BUILD_NUMBER
+                echo $GCLOUD_DOCKER_REPO_HOST_NAME
                 
                 #? Build and push docker image to artifact registry
                 bash limebrew-ci-scripts/scripts/ci/build-push-docker.sh
