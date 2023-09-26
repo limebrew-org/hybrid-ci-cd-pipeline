@@ -1,0 +1,30 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+    build_and_push:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v4
+        - name: Build application in vm instance
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HYBRID_CICD_HOST_IP }}
+            username: ${{ secrets.HYBRID_CICD_HOST_USERNAME }}
+            key: ${{ secrets.HYBRID_CICD_HOST_KEY }}
+            port: 22
+            script: |
+                echo "Successfully SSH into the VM Instance"
+                #? Navigate to the cloned repo
+                cd hybrid-ci-cd-pipeline
+                #? Checkout to main branch
+                git checkout main
+                echo "Checkout to main branch"
+                #? Build the application
+                npm run build
+                
+                
