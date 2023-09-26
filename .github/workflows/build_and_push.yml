@@ -30,6 +30,10 @@ jobs:
                 #? Pull latest changes in this branch
                 git pull origin main
 
+                #? Initialise submodules
+                git submodule update --recursive --init --remote
+
+                #? Initialize environment variables
                 export BUILD_NUMBER=${{ github.run_number }}
                 export GCLOUD_ENCODED_SERVICE_ACCOUNT_JSON=${{ secrets.GCLOUD_ENCODED_INFRA_CICD_API_KEY }}
                 export GCLOUD_DOCKER_REPO_HOST_NAME=${{ secrets.GCLOUD_DOCKER_REPO_HOSTNAME }}
