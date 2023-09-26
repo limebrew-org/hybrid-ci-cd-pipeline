@@ -19,13 +19,20 @@ jobs:
             port: 22
             script: |
                 echo "Successfully SSH into the VM Instance"
+                
                 #? Navigate to the cloned repo
                 cd workspace/hybrid-ci-cd-pipeline
+                
                 #? Checkout to main branch
                 git checkout main
                 echo "Checkout to main branch"
+                
                 #? Pull latest changes in this branch
                 git pull origin main
+
+                #? Activate bash profile
+                source ~/.bashrc
+
                 #? Build the application
                 npm run build
                 
