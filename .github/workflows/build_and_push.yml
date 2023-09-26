@@ -30,17 +30,13 @@ jobs:
                 #? Pull latest changes in this branch
                 git pull origin main
 
-                #? Activate bash profile
-                source ~/.bashrc
+                #? Build the docker Image 
+                sudo docker build -t hybrid-cicd-react:${{github.run_number}}
 
-                #? Initialize nvm
-                export NVM_DIR="$HOME/.nvm"
-                [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-                [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+                #? Clean build cache
+                sudo docker system prune -a --force
+                
 
-                nvm use 18.16.1
 
-                #? Build the application
-                npm run build
                 
                 
