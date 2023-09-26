@@ -20,10 +20,12 @@ jobs:
             script: |
                 echo "Successfully SSH into the VM Instance"
                 #? Navigate to the cloned repo
-                cd hybrid-ci-cd-pipeline
+                cd workspace/hybrid-ci-cd-pipeline
                 #? Checkout to main branch
                 git checkout main
                 echo "Checkout to main branch"
+                #? Pull latest changes in this branch
+                git pull origin main
                 #? Build the application
                 npm run build
                 
