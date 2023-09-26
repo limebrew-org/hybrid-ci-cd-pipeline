@@ -31,7 +31,7 @@ jobs:
                 git pull origin main
 
                 #? Build the docker Image 
-                sudo docker build -t hybrid-cicd-react:${{github.run_number}}
+                sudo docker build -t hybrid-cicd-react:1.0.${{github.run_number}} .
 
                 #? Clean build cache
                 sudo docker system prune -a --force
