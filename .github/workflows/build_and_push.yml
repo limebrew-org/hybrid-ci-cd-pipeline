@@ -47,7 +47,7 @@ jobs:
                 #? Build and push docker image to artifact registry
                 bash limebrew-ci-scripts/scripts/ci/build-push-docker.sh
 
-                #? Clean build Cache
+                #? Clean build cache
                 sudo docker system prune -a --force
                 
 
