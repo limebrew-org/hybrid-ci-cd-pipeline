@@ -30,8 +30,16 @@ jobs:
                 #? Pull latest changes in this branch
                 git pull origin main
 
-                #? Build the docker Image 
-                sudo docker build -t hybrid-cicd-react:1.0.${{github.run_number}} .
+                export BUILD_NUMBER=${{ github.run_number }}
+                export GCLOUD_ENCODED_SERVICE_ACCOUNT_JSON=${{ secrets.GCLOUD_ENCODED_INFRA_CICD_API_KEY }}
+                export GCLOUD_DOCKER_REPO_HOST_NAME=${{ secrets.GCLOUD_DOCKER_REPO_HOSTNAME }}
+                export GCLOUD_PROJECT_ID=${{ secrets.GCLOUD_INFRA_CICD_PROJECT_ID }}
+                export GCLOUD_DOCKER_REPO_NAME=${{ secrets.GCLOUD_DOCKER_REPO_NAME }}
+                export SERVICE_IMAGE_NAME=hybrid-cicd-react
+                export TAG_NAME=1.0.$BUILD_NUMBER
+                
+                #? Build and push docker image to artifact registry
+                bash limebrew-ci-scripts/scripts/ci/build-push-docker.sh
 
                 #? Clean build cache
                 sudo docker system prune -a --force
